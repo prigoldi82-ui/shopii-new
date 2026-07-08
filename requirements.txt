@@ -1,0 +1,5 @@
+telethon
+user-agent
+requests
+aiohttp
+aiofiles
