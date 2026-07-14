@@ -75,13 +75,13 @@ def premium_emoji(text):
 # Bot Configuration
 API_ID = 36004853
 API_HASH = 'c7177a258363a75ddb1352816ba970cf'
-BOT_TOKEN = '8979290742:AAGKgQfa6KuMggKKIwVxvwml3iVIW2GjQSc'
+BOT_TOKEN = '8905550636:AAF5jP5mZ3QWGDKcb10winOdrKvTDld1J38'
 
 # Force Join Config
 CHANNEL_ID = -1003346517656
 GROUP_ID = -1003674925513
 
-CHANNEL_LINK = "https://t.me/+YVoVJw35RQ44OTg1"
+CHANNEL_LINK = "https://t.me/kesavredirect"
 GROUP_LINK = "https://t.me/+RCE7LlYKgww4N2Rl"
 
 
@@ -433,16 +433,8 @@ async def force_start(event):
             user_id
         ))
 
-        # SUCCESS MESSAGE
-        await event.respond(
-            f"""
-✅ Verification Successful
-
-Welcome {event.sender.first_name} 🎉
-
-Now you can use this bot.
-"""
-        )
+        # Force Join verified: show the premium dashboard.
+        await show_home(event)
 
     except UserNotParticipantError:
 
@@ -469,9 +461,9 @@ Now you can use this bot.
         await event.respond(
             """
 🔗 𝗝𝗢𝗜𝗡 𝗥𝗘𝗤𝗨𝗜𝗥𝗘𝗗
-━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 𝗝𝗼𝗶𝗻 𝗼𝘂𝗿 𝗰𝗵𝗮𝗻𝗻𝗲𝗹 & 𝗴𝗿𝗼𝘂𝗽 𝘁𝗼 𝘂𝘀𝗲 𝘁𝗵𝗶𝘀 𝗯𝗼𝘁.
-━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
  𝟭. 𝗝𝗼𝗶𝗻 𝗯𝗼𝘁𝗵 𝘂𝘀𝗶𝗻𝗴 𝘁𝗵𝗲 𝗯𝘂𝘁𝘁𝗼𝗻𝘀 𝗯𝗲𝗹𝗼𝘄 (𝘀𝗮𝗺𝗲 𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺 𝗮𝗰𝗰𝗼𝘂𝗻𝘁)
  𝟮. 𝗧𝗮𝗽 𝗝𝗼𝗶𝗻𝗲𝗱 𝘁𝗼 𝘃𝗲𝗿𝗶𝗳𝘆
 """,
@@ -501,16 +493,8 @@ async def verify_join(event):
             user_id
         ))
 
-        # SUCCESS
-        await event.edit(
-            f"""
-✅ Verification Successful
-
-Welcome 🎉
-
-Now you can use this bot.
-"""
-        )
+        # Force Join verified: edit the same message into the dashboard.
+        await show_home(event)
 
     except UserNotParticipantError:
 
@@ -834,7 +818,7 @@ async def update_progress(user_id, message_id, results, current_attempt_count):
 
     gateway = results['charged'][0]['gateway'] if results['charged'] else (results['approved'][0]['gateway'] if results['approved'] else 'Unknown')
 
-    progress_text = f"""<b>⚡💳 ㅤ#𝒮𝒽𝑜𝓅𝒾𝒾𝒾  💳⚡</b>
+    progress_text = f"""<b>⚡💳 ㅤ#Shopi X  💳⚡</b>
 <b>━━━━━━━━━━━━━━━━━</b>
 <b>⚡💠 𝐏𝐫𝐨𝐠𝐫𝐞𝐬𝐬</b>
 <blockquote>💳 Total: {results['total']} | ✅ Charged: {len(results['charged'])} | 🔥 Live: {len(results['approved'])} | ❌ Dead: {len(results['dead'])}</blockquote>
@@ -876,7 +860,7 @@ async def send_final_results(user_id, results):
 
     current_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-    summary = f"""<b>⚡💳 ㅤ#𝒮𝒽𝑜𝓅𝒾𝒾𝒾  💳⚡</b>
+    summary = f"""<b>⚡💳 ㅤ#Shopi X  💳⚡</b>
 <b>━━━━━━━━━━━━━━━━━</b>
 <b>⚡💠 𝐑𝐞𝐬𝐮𝐥𝐭𝐬</b>
 <blockquote>💳 Total: {results['total']} | ✅ Charged: {len(results['charged'])} | 🔥 Live: {len(results['approved'])} | ❌ Dead: {len(results['dead'])}</blockquote>
@@ -955,31 +939,344 @@ async def test_proxy(proxy):
             return {'proxy': proxy, 'status': 'alive'}
     except:
         return {'proxy': proxy, 'status': 'dead'}
-@bot.on(events.NewMessage(pattern='/start'))
-async def start(event):
-    await event.reply(
-        premium_emoji(
-            "<b>⚡💳 Welcome to 𝐒𝐡𝐨𝐩𝐢 𝐗 ! 💳⚡</b>\n"
-            "<b>━━━━━━━━━━━━━━━━━</b>\n"
-            "<b>⚡💠 𝐂𝐂 𝐂𝐨𝐦𝐦𝐚𝐧𝐝𝐬</b>\n"
-            "<blockquote>• /cc card|mm|yy|cvv - Check single CC\n"
-            "• /chk - Reply to .txt file to check cards</blockquote>\n"
-            "<b>⚡💠 𝐒𝐢𝐭𝐞 𝐂𝐨𝐦𝐦𝐚𝐧𝐝𝐬</b>\n"
-            "<blockquote>• /site - Check all sites & remove dead\n"
-            "• /rm url - Remove a specific site</blockquote>\n"
-            "<b>⚡💠 𝐏𝐫𝐨𝐱𝐲 𝐂𝐨𝐦𝐦𝐚𝐧𝐝𝐬</b>\n"
-            "<blockquote>• /proxy - Check all proxies & remove dead\n"
-            "• /addproxy - Add proxies (one per line)\n"
-            "• /chkproxy proxy - Check single proxy\n"
-            "• /rmproxy proxy - Remove single proxy\n"
-            "• /rmproxyindex 1,2,3 - Remove by index\n"
-            "• /clearproxy - Remove all proxies\n"
-            "• /getproxy - Get all proxies</blockquote>\n"
-            "<b>━━━━━━━━━━━━━━━━━</b>\n"
-            "<b>⚠️ Only premium users can use this bot.</b>"
-        ),
-        parse_mode='html'
+
+import time
+from datetime import datetime, timezone
+from telethon import events, Button
+
+BOT_STARTED_AT = time.time()
+
+CB_HOME = b"dash_home"
+CB_CC = b"dash_cc"
+CB_SITES = b"dash_sites"
+CB_PROXY = b"dash_proxy"
+CB_ADMIN = b"dash_admin"
+CB_PLAN = b"dash_plan"
+CB_HELP = b"dash_help"
+CB_SUPPORT = b"dash_support"
+
+
+def line():
+    return "━━━━━━━━━━━━━━━━"
+
+
+def fmt_date(value):
+    if not value:
+        return "Never"
+
+    if isinstance(value, (int, float)):
+        return datetime.fromtimestamp(value).strftime("%Y-%m-%d")
+
+    if isinstance(value, datetime):
+        return value.strftime("%Y-%m-%d")
+
+    return str(value)
+
+
+def remaining_days(expiry):
+    if not expiry:
+        return "Unlimited"
+
+    try:
+        if isinstance(expiry, (int, float)):
+            expiry_dt = datetime.fromtimestamp(expiry)
+        elif isinstance(expiry, datetime):
+            expiry_dt = expiry.replace(tzinfo=None)
+        else:
+            expiry_dt = datetime.fromisoformat(str(expiry)).replace(tzinfo=None)
+
+        days = (expiry_dt - datetime.now()).days
+        return max(days, 0)
+    except Exception:
+        return "Unknown"
+
+
+def get_owner_ids():
+    """Read owner/admin IDs from the existing premium owner file."""
+    return {int(user_id) for user_id in load_premium_users() if str(user_id).isdigit()}
+
+
+def is_owner_user(user_id):
+    return user_id in get_owner_ids()
+
+
+def get_user_plan(user_id):
+    """Display-only plan label using the existing premium logic."""
+    if is_owner_user(user_id):
+        return "Owner"
+
+    if is_premium(user_id):
+        return "Premium"
+
+    return "Free"
+
+
+def get_user_expiry(user_id):
+    """Read expiry from the existing redeemed-users file: user_id|YYYY-MM-DD."""
+    user_id = str(user_id)
+
+    try:
+        with open(USERS_FILE, "r") as f:
+            for row in f:
+                row = row.strip()
+                if not row or "|" not in row:
+                    continue
+
+                saved_user_id, expiry = row.split("|", 1)
+                if saved_user_id == user_id:
+                    return expiry
+    except Exception:
+        pass
+
+    return None
+
+
+def count_sites():
+    return len(load_sites())
+
+
+def count_proxies():
+    return len(load_proxies())
+
+
+def count_premium_users():
+    active_users = 0
+
+    try:
+        with open(USERS_FILE, "r") as f:
+            for row in f:
+                row = row.strip()
+                if not row or "|" not in row:
+                    continue
+
+                _, expiry = row.split("|", 1)
+                try:
+                    if datetime.strptime(expiry, "%Y-%m-%d") >= datetime.now():
+                        active_users += 1
+                except Exception:
+                    continue
+    except Exception:
+        pass
+
+    return active_users
+
+
+def bot_uptime():
+    seconds = int(time.time() - BOT_STARTED_AT)
+    hours, rem = divmod(seconds, 3600)
+    minutes, seconds = divmod(rem, 60)
+    return f"{hours}h {minutes}m {seconds}s"
+
+
+def home_buttons():
+    return [
+        [Button.inline("💳 Shopify", CB_CC), Button.inline("🌐 Sites", CB_SITES)],
+        [Button.inline("🌍 Proxy", CB_PROXY), Button.inline("👑 Admin", CB_ADMIN)],
+        [Button.inline("💎 My Plan", CB_PLAN)],
+        [Button.inline("⚙ Help", CB_HELP), Button.inline("📢 Support", CB_SUPPORT)],
+    ]
+
+
+def back_buttons():
+    return [[Button.inline("⬅ Back", CB_HOME)]]
+
+
+async def user_info(event):
+    sender = await event.get_sender()
+    user_id = sender.id
+    username = f"@{sender.username}" if sender.username else sender.first_name or "User"
+    plan = get_user_plan(user_id)
+    expiry = get_user_expiry(user_id)
+
+    return sender, user_id, username, plan, expiry
+
+
+async def show_home(event):
+    _, user_id, username, plan, expiry = await user_info(event)
+
+    text = (
+        "<b>💎 PREMIUM DASHBOARD</b>\n"
+        f"{line()}\n"
+        "<blockquote>"
+        f"👤 <b>Username:</b> <code>{username}</code>\n"
+        f"🆔 <b>User ID:</b> <code>{user_id}</code>\n"
+        f"💎 <b>Plan:</b> <code>{plan}</code>\n"
+        f"📅 <b>Expiry Date:</b> <code>{fmt_date(expiry)}</code>\n"
+        f"⚡ <b>Status:</b> <code>ONLINE</code>\n"
+        "</blockquote>\n"
+        f"{line()}"
     )
+
+    text = premium_emoji(text)
+
+    if isinstance(event, events.CallbackQuery.Event):
+        await event.edit(text, buttons=home_buttons(), parse_mode="html")
+    else:
+        await event.respond(text, buttons=home_buttons(), parse_mode="html")
+
+
+async def show_cc_menu(event):
+    text = (
+        "<b>💳 CC COMMANDS</b>\n"
+        f"{line()}\n"
+        "<blockquote>"
+        "• <code>/cc</code> - Check a single CC\n"
+        "• <code>/chk</code> - Reply to a .txt file to check cards"
+        "</blockquote>\n"
+        f"{line()}"
+    )
+    await event.edit(premium_emoji(text), buttons=back_buttons(), parse_mode="html")
+
+
+async def show_sites_menu(event):
+    text = (
+        "<b>🌐 SITE COMMANDS</b>\n"
+        f"{line()}\n"
+        "<blockquote>"
+        "• <code>/site</code> - Check all sites and remove dead ones\n"
+        "• <code>/rm</code> - Remove a specific site"
+        "</blockquote>\n"
+        f"{line()}"
+    )
+    await event.edit(premium_emoji(text), buttons=back_buttons(), parse_mode="html")
+
+
+async def show_proxy_menu(event):
+    text = (
+        "<b>🌍 PROXY COMMANDS</b>\n"
+        f"{line()}\n"
+        "<blockquote>"
+        "• <code>/proxy</code> - Check all proxies and remove dead ones\n"
+        "• <code>/addproxy</code> - Add proxies, one per line\n"
+        "• <code>/chkproxy</code> - Check a single proxy\n"
+        "• <code>/rmproxy</code> - Remove proxy by value\n"
+        "• <code>/rmproxyindex</code> - Remove proxy by index\n"
+        "• <code>/clearproxy</code> - Remove all proxies\n"
+        "• <code>/getproxy</code> - Get all proxies"
+        "</blockquote>\n"
+        f"{line()}"
+    )
+    await event.edit(premium_emoji(text), buttons=back_buttons(), parse_mode="html")
+
+
+async def show_admin_menu(event):
+    _, user_id, _, _, _ = await user_info(event)
+
+    if not is_owner_user(user_id):
+        await event.answer("Admin access only.", alert=True)
+        return
+
+    text = (
+    "<b>👑 ADMIN PANEL</b>\n"
+    f"{line()}\n\n"
+
+    "<blockquote>"
+    f"🌐 <b>Total Sites</b> : <code>{count_sites()}</code>\n"
+    f"🌍 <b>Total Proxies</b> : <code>{count_proxies()}</code>\n"
+    f"💎 <b>Premium Users</b> : <code>{count_premium_users()}</code>\n"
+    f"👑 <b>Owners</b> : <code>{len(get_owner_ids())}</code>\n"
+    f"⏱ <b>Uptime</b> : <code>{bot_uptime()}</code>"
+    "</blockquote>\n\n"
+
+    "🛠 <b>ADMIN COMMANDS</b>\n"
+    "<blockquote>"
+    "• <code>/genkey</code>  Generate Premium Key\n"
+    "• <code>/broadcast</code>  Broadcast Message\n"
+    "• <code>/stats</code>  View Statistics"
+    "</blockquote>\n\n"
+
+    "⚡ <i>Administrator Access</i>\n"
+    f"{line()}"
+    )
+
+    await event.edit(premium_emoji(text), buttons=back_buttons(), parse_mode="html")
+
+
+async def show_plan(event):
+    _, user_id, username, plan, expiry = await user_info(event)
+
+    text = (
+        "<b>💎 MY PLAN</b>\n"
+        f"{line()}\n"
+        "<blockquote>"
+        f"👤 <b>Username:</b> <code>{username}</code>\n"
+        f"💎 <b>Current Plan:</b> <code>{plan}</code>\n"
+        f"📅 <b>Expiry Date:</b> <code>{fmt_date(expiry)}</code>\n"
+        f"⏳ <b>Remaining Days:</b> <code>{remaining_days(expiry)}</code>\n"
+        f"🎟 <b>Redeem Status:</b> <code>{'Active' if plan != 'Free' else 'Not Redeemed'}</code>"
+        "</blockquote>\n"
+        f"{line()}"
+    )
+    await event.edit(premium_emoji(text), buttons=back_buttons(), parse_mode="html")
+
+
+async def show_help(event):
+    text = (
+        "<b>⚙ HELP</b>\n"
+        f"{line()}\n"
+        "<blockquote>"
+        "💳 <b>How to use /cc</b>\n"
+        "<code>/cc 4111111111111111|12|2028|123</code>\n\n"
+        "📄 <b>How to use /chk</b>\n"
+        "Reply to a <code>.txt</code> file with <code>/chk</code>\n\n"
+        "⚠ <b>Common Errors</b>\n"
+        "• Invalid card format\n"
+        "• Dead proxy\n"
+        "• Site timeout\n"
+        "• Premium access required"
+        "</blockquote>\n"
+        f"{line()}"
+    )
+
+    buttons = [
+        [Button.inline("📢 Support", CB_SUPPORT)],
+        [Button.inline("⬅ Back", CB_HOME)],
+    ]
+
+    await event.edit(premium_emoji(text), buttons=buttons, parse_mode="html")
+
+
+async def show_support(event):
+    text = (
+        "<b>📢 SUPPORT</b>\n"
+        f"{line()}\n"
+        "<blockquote>"
+        "Need help with access, keys, proxy errors, or checking issues?\n\n"
+        "Contact the bot owner/admin from your official support channel."
+        "</blockquote>\n"
+        f"{line()}"
+    )
+
+    await event.edit(premium_emoji(text), buttons=back_buttons(), parse_mode="html")
+
+
+@bot.on(events.CallbackQuery)
+async def dashboard_callbacks(event):
+    data = event.data
+    dashboard_callbacks_data = {
+        CB_HOME, CB_CC, CB_SITES, CB_PROXY, CB_ADMIN,
+        CB_PLAN, CB_HELP, CB_SUPPORT,
+    }
+
+    if data not in dashboard_callbacks_data:
+        return
+
+    if data == CB_HOME:
+        await show_home(event)
+    elif data == CB_CC:
+        await show_cc_menu(event)
+    elif data == CB_SITES:
+        await show_sites_menu(event)
+    elif data == CB_PROXY:
+        await show_proxy_menu(event)
+    elif data == CB_ADMIN:
+        await show_admin_menu(event)
+    elif data == CB_PLAN:
+        await show_plan(event)
+    elif data == CB_HELP:
+        await show_help(event)
+    elif data == CB_SUPPORT:
+        await show_support(event)
 
 @bot.on(events.NewMessage(pattern=r'^/cc\s+'))
 async def single_cc_check(event):
@@ -1020,7 +1317,7 @@ async def single_cc_check(event):
 
     status_msg = await event.reply(
         premium_emoji(
-            f"<b>⚡💳 ㅤ#𝒮𝒽𝑜𝓅𝒾𝒾𝒾  💳⚡</b>\n"
+            f"<b>⚡💳 ㅤ#Shopi X  💳⚡</b>\n"
             f"<b>━━━━━━━━━━━━━━━━━</b>\n"
             f"<b>⚡💠 𝐂𝐡𝐞𝐜𝐤𝐢𝐧𝐠...</b>\n"
             f"<blockquote>💳 Card: <code>{card}</code></blockquote>\n"
@@ -1703,7 +2000,7 @@ async def love_you(event):
 # ===========================
 # TEST PRIVATE CHANNEL
 # ===========================
-@bot.on(events.NewMessage(pattern='/testx'))
+@bot.on(events.NewMessage(pattern='/tux'))
 async def test_private_channel(event):
     try:
         await bot.send_message(
@@ -1717,6 +2014,7 @@ async def test_private_channel(event):
 
     except Exception as e:
         await event.reply(f"❌ Error:\n<code>{e}</code>", parse_mode="html")
+
 
 
 
